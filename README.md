@@ -1,7 +1,9 @@
  
 ![](https://github.com/tchoi8/set/blob/master/NaKim-3455.jpg?raw=true)
 
-Happening for Set. November 5. 2015 
+#SET 
+
+November 5. 2015 
 
 Some time ago, my friend [Na](http://www.ynkim.com/) asked me to stage a performance in her exhibition titled Set. We've been talking about our work and the relationships that inspire our work. I first met Na about ten years ago in South Korea, and since then, have only kept in touch sporadically. She was living in Amsterdam and I was living in New York. Alot has happened in the past ten years. The exhibition SET is her compilation of many projects she's done and re-created into a physical installation.
 
@@ -14,7 +16,9 @@ I set up the general structure of the performance, Lauren and Anastasis will eac
 The performance will happen between 6~8pm on November 5th, 2015 at [Doosan Gallery](http://doosangallery.com/newyork/introduction_eng.asp), 533 West 25th Street, New York, NY 10001 
 
 
-Happening for SET.
+#Happening for SET 
+
+SET by Na Kim
 
 Directed by Taeyoon Choi
 
