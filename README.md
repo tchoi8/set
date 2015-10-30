@@ -26,7 +26,7 @@ Featuring
 
 - [Lauren McCarthy](http://lauren-mccarthy.com/)
 
-- [Anastasis Germinidis](https://github.com/agermanidis) 
+- [Anastasis Germanidis](https://github.com/agermanidis) 
 
 - [Performing Participation](https://github.com/tchoi8/PerformingParticipation)
 	- [Natalia Cabrera](http://www.nataliacabrera.com/itp/category/performing-participation//) 

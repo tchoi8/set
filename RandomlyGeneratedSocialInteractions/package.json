@@ -1,0 +1,19 @@
+{
+  "name": "randomly-generated-social-interactions",
+  "version": "1.0.0",
+  "description": "- Hello // auto generate greeting - Hi! // auto generate greeting // pick interaction style // // ... - Goodbye // auto generate ending - See you later alligator",
+  "main": ".#server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "casual": "^1.4.9",
+    "corpora-project": "^0.1.2",
+    "lodash": "^3.10.1",
+    "node-uuid": "^1.4.3",
+    "ws": "^0.8.0"
+  }
+}

@@ -1,0 +1,49 @@
+body {
+    text-align: center;
+    margin-top: 100px;
+    font-family: Helvetica;
+    background-image: url("gradient_bg.png");
+    color: white;
+}
+
+h1 {
+    font-weight: bold;
+    font-size: 100px;
+    padding: 20px;
+    text-shadow: 2px 2px 10px gray;
+    margin: 0;
+}
+
+h3 {
+    margin-top: 60px;
+    color: white;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+p {
+    margin-top: 150px;
+    margin-bottom: 50px;
+    font-size: 20px;
+    color: #eeeeee;
+}
+
+button {
+    padding: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+    outline: none;
+    font-size: 80px;
+    font-weight: 400;
+    background: none;
+    border: 5px dotted white;
+    color: white;
+    margin: 50px;
+}
+
+#ongoing {
+    display: none;
+    position: relative;
+    top: 50%;
+    transform: translateY(-60%);
+}
