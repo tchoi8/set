@@ -1,0 +1,18 @@
+module.exports = [
+  '3d',
+  'charcoal',
+  'crayon',
+  'food',
+  'glass',
+  'illustration',
+  'light',
+  'metal',
+  'oil',
+  'performance',
+  'sand',
+  'stencil',
+  'stop motion',
+  'textile',
+  'textual',
+  'wood',
+];

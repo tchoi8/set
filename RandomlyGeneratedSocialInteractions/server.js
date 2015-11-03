@@ -1,27 +1,56 @@
 var _ = require('lodash');
+var express = require('express');
 var WebSocketServer = require('ws').Server;
+
 var wss = new WebSocketServer({port: 8080});
+var app = express();
 
 var Participant = require('./Participant');
 var Interaction = require('./Interaction');
 
 var participants = [];
 var interactions = [];
+var interactionHistory = [];
 
 var testInteraction = [
     {index: 0, command: "say", content: "Hello <%- other.firstName %>, I am <%- me.firstName %>", duration: 5},
     {index: 1, command: "say", content: "Hello <%- other.firstName %>", duration: 5},
     {index: 0, command: "say", content: "Goodbye <%- other.firstName %>", duration: 5},
     {index: 1, command: "say", content: "Goodbye <%- other.firstName %>", duration: 5},
-]
+];
 
-function randomPairs(ps) {
-    ps = _.shuffle(ps);
-    var ret = [];
-    while (ps.length > 1) {
-        ret.push([ps.pop(), ps.pop()]);
+function pairParticipants(ps) {
+  ps = _.shuffle(ps);
+  var paired = {};
+  var ret = [];
+  for (var i = 0; i < ps.length; i++) {
+    for (var j = i+1; j < ps.length; j++) {
+      if (paired[j]) {
+        continue;
+      }
+      if (shouldInteract(ps[i], ps[j])) {
+        ret.push([ps[i], ps[j]]);
+        paired[i] = true;
+        paired[j] = true;
+      }
     }
-    return ret;
+  }
+  return ret;
+}
+
+var INTERACTION_BUFFER_TIME = 15000;
+
+function shouldInteract(p1, p2) {
+  for (var i = 0; i < interactionHistory.length; i++) {
+    var interaction = interactionHistory[i];
+    if ((new Date).getTime() - interaction.endTime().getTime() > INTERACTION_BUFFER_TIME) {
+      return true;
+    }
+    if (_.every([p1, p2], function(p) { return _.includes(interaction.participants, p) })) {
+      return false;
+    }
+  }
+  return true;
 }
 
 function refresh() {
@@ -32,8 +61,11 @@ function refresh() {
 
     // clean up finished interactions
     interactions = _.filter(interactions, function(interaction) {
-        if (!interaction.isValid()) interaction.broadcastEnd();
-        return interaction.isValid();
+      if (!interaction.isValid()) {
+        interaction.broadcastEnd();
+        interactionHistory.unshift(interaction);
+      }
+      return interaction.isValid();
     });
 
     // find available participants
@@ -45,50 +77,52 @@ function refresh() {
             return !_.contains(interaction.participants, participant);
         });
     });
+
     console.log("number of available participants:", available.length, "/", participants.length);
     console.log("number of ongoing interactions:", interactions.length);
     console.log('<>');
     
     // pair available participants
-    var pairs = randomPairs(available);
+    var pairs = pairParticipants(available);
     for (var i = 0; i < pairs.length; i++) {
         var interaction = new Interaction(pairs[i]);
-        interaction.addParts(testInteraction);
+        //interaction.addParts(testInteraction);
         interactions.push(interaction);
-        interaction.broadcast();
+        interaction.broadcastStart();
     }
 }
 
-setInterval(refresh, 2000);
+setInterval(refresh, 10000);
 
-wss.on('connection', function connection(conn) {
+wss.on('connection', function connection(c) {
+  (function(conn){
     var participant = new Participant(conn);  
     participants.push(participant);
 
     console.log('- created connection', participant.id);
 
     conn.on('message', function(msg) {
-        var parsed = JSON.parse(msg);
+      var parsed = JSON.parse(msg);
 
-        // adding some timeouts to responses to make the participant wait a few seconds
-        switch(parsed.type) {
-        case 'i-want-a-personality':
-            setTimeout(function() {
-                participant.broadcast('personality', participant.serialize());
-            }, 8000);
-            break;
+      // adding some timeouts to responses to make the participant wait a few seconds
+      switch(parsed.type) {
+      case 'i-want-a-personality':
+        setTimeout(function() {
+          console.log("broadcasting personality");
+          participant.broadcast('personality', participant.serialize());
+        }, 8000);
+        break;
 
-        case 'i-am-available':
-            setTimeout(function() {
-                participant.isAvailable = true;
-            }, 3000);
-            break;
-        }
+      case 'i-am-available':
+        setTimeout(function() {
+          participant.isAvailable = true;
+        }, 3000);
+        break;
+      }
     });
 
     conn.on('close', function() {
-        console.log('- connection closed', participant.id);
-        participant.isAvailable = false;
-        participants = _.remove(participants, participant);
+      console.log('- connection closed', participant.id);
     });
+  })(c);
 });
