@@ -15,11 +15,22 @@
       <button id="start-button">start</button>
     </div>
     <div id="ongoing">
-      <img id="headphones" src="headphones.png"></img>
+      <div class="box" id="identity-box">
+        
+        <span>No identity received yet</span>
+      </div>
+      <div class="box" id="">
+        <span>Last instruction:</span>
+        <span id="last-instruction"><font color="gray">N/A</font></span>
+      </div>
+      <div>
+        <input type="range" id="speed-input" value="1" min="0.5" max="1.5" step="0.01">
+        <span id="speed-input-label" class="input-label">voice speed (current value = 1.0)</span>
+      </div>
       <div><button id="end-button">end</button></div>
     </div>
-    <script src="EventEmitter.min.js"></script>
-    <script src="jquery.js"></script>
+    <script src="lib/EventEmitter.min.js"></script>
+    <script src="lib/jquery.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

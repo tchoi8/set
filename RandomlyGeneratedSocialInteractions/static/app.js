@@ -21,12 +21,24 @@ var INTERACTION_STARTED = 'Your next interaction has been generated. Please loca
   'the {location} and start walking to that location. ' +
   'You will be interacting with {other_name}.';
 var INTERACTION_ENDED = 'This interaction has ended. Please head back at the entrance ' +
-  'and wait while we generate your next interaction.';
+  'and hold while we generate your new identity.';
 
 // ---
 
-var HOLD_MUSIC_PATH = "hold_music.mp3";
-var BEEP_SOUND_PATH = "beep.wav";
+var HOLD_MUSIC_PATH = "sounds/hold_music.mp3";
+var BEEP_SOUND_PATH = "sounds/beep.wav";
+
+// ---
+
+var utteranceQueue = [];
+
+function clearUtteranceQueue() {
+  utteranceQueue = [];
+}
+
+function popUtterance() {
+  return utteranceQueue.shift();
+}
 
 // ---
 
@@ -103,7 +115,7 @@ function say(text, cb) {
     utterance.voiceURI = 'native';
     utterance.volume = 1;
     utterance.pitch = 1.05;
-    utterance.rate = 0.95;
+    utterance.rate = parseFloat($("#speed-input").val());
     utterance.lang = 'en-US';
     utterance.text = sents[i];
     //console.log("speaking utterance");
@@ -156,6 +168,7 @@ function endInteraction() {
 }
 
 function performInstruction(instruction) {
+  $("#last-instruction").html("<b>" + instruction.command + ":</b> " + instruction.content);
   if (instruction.participantId !== personality.id) return;
   if (instruction.command === "do") {
     say(instruction.content);
@@ -169,7 +182,11 @@ function refresh() {
     if (currentInteraction.parts.length > 0) {
       var nextInstruction = currentInteraction.parts[0];
       if ((new Date).getTime() > (new Date(nextInstruction.start)).getTime()) {
-        performInstruction(nextInstruction);
+        playAudio("beep.wav");
+        setTimeout(function() {
+          stopAllAudio();
+          performInstruction(nextInstruction);
+        }, 1000);
         currentInteraction.parts.shift();
       }
     } else if ((new Date).getTime() > (new Date(currentInteraction.end)).getTime()) {
@@ -199,7 +216,7 @@ function startInteraction(interaction) {
     location: interaction.location,
     other_name: other.name
   }));
-  timeoutId = setInterval(refresh, 500);
+  timeoutId = setInterval(refresh, 100);
 }
 
 function goToStart() {
@@ -257,7 +274,8 @@ events.on('interaction-ended', function(interaction) {
 });
 
 $("#start-button").on("click", function(evt) {
-  loadAudio("hold_music.mp3");
+  loadAudio("sounds/beep.wav");
+  loadAudio("sounds/hold_music.mp3");
   say(WELCOME);
   $("#start").fadeOut(300, function() {
     $("#ongoing").fadeIn(300, function() {
@@ -271,3 +289,8 @@ $("#end-button").on("click", function(evt) {
   disconnect();
   goToStart();
 });
+
+$("#speed-input").on("input", function(evt) {
+  $("#speed-input-label").html("speed (current value = "+$("#speed-input").val()+")");
+});
+

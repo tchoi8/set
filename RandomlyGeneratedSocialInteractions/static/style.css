@@ -2,7 +2,7 @@ body {
     text-align: center;
     margin-top: 100px;
     font-family: Helvetica;
-    background-image: url("gradient_bg.png");
+    background-image: url("images/gradient_bg.png");
     color: white;
 }
 
@@ -43,4 +43,15 @@ button {
 
 #ongoing {
     display: none;
+}
+
+input[type=range] {
+    width: 500px;
+    
+}
+
+.input-label {
+    display: block;
+    font-size: 30px;
+    margin: 20px;
 }
