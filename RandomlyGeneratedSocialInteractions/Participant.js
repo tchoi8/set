@@ -3,6 +3,8 @@ var uuid = require('node-uuid');
 var casual = require('casual');
 var corpora = require('corpora-project');
 var queryArticle = require('./AvsAn').query;
+var quirks = require('./data/quirks');
+var Identity = require("./Identity")
 
 function withArticle(phrase) {
   return queryArticle(phrase) + ' ' + phrase;
@@ -13,17 +15,17 @@ function generateOccupation() {
 }
 
 function calculateSpeechDelay(s) {
-  return Math.max(1, Math.floor(s.length/8)) + 3;
+  return Math.max(3, Math.floor(s.length/8)) + 1;
 }
+
+// double tap
 
 var Participant = function(conn) {
   this.id = uuid();
   this.connection = conn;
-  this.firstName = casual.first_name;
-  this.lastName = casual.last_name;
-  this.age = _.random(18, 60);
-  this.occupation = generateOccupation();
   this.currentInteraction = null;
+  this.identity = null;
+  this.isAvailable = false;
 };
 
 Participant.prototype.name = function() {
@@ -33,9 +35,7 @@ Participant.prototype.name = function() {
 Participant.prototype.serialize = function() {
   return {
     id: this.id,
-    name: this.name(),
-    age: this.age,
-    occupation: this.occupation
+    identity: this.identity.serialize()
   };
 };
 
@@ -105,9 +105,14 @@ Participant.prototype.conversationPartner = function () {
 
 Participant.prototype.createTemplateScope = function() {
   return {
-    me: this,
-    other: this.conversationPartner()
+    me: this.identity,
+    other: this.conversationPartner().identity
   };
 };
+
+Participant.prototype.regenerateIdentity = function() {
+  this.identity = new Identity();
+  return this;
+}
 
 module.exports = Participant;

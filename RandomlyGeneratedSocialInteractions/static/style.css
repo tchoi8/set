@@ -21,7 +21,7 @@ h3 {
     font-weight: 400;
 }
 
-p {
+#start p {
     margin-top: 100px;
     margin-bottom: 50px;
     font-size: 35px;
@@ -33,12 +33,12 @@ button {
     padding-left: 40px;
     padding-right: 40px;
     outline: none;
-    font-size: 80px;
+    font-size: 50px;
     font-weight: 400;
     background: none;
     border: 5px dotted white;
     color: white;
-    margin: 50px;
+    margin: 30px;
 }
 
 #ongoing {
@@ -46,12 +46,66 @@ button {
 }
 
 input[type=range] {
-    width: 500px;
-    
+    width: 95%;
+    height: 100px;
 }
 
-.input-label {
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: goldenrod;
+    margin-top: -4px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 30px;
+    background: #ddd;
+    border: none;
+    border-radius: 10px;
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+    background: none;
+    outline: none;
+}
+
+
+.box {
+    width: 500px;
+    margin: 50px auto;
+}
+
+#ongoing img {
+    width: 130px;
     display: block;
-    font-size: 30px;
-    margin: 20px;
+    margin: 0 auto;
+}
+
+#ongoing p {
+    font-size: 50px;
+}
+
+#ongoing span {
+    font-size: 50px;
+}
+
+.label {
+    text-decoration: underline
+}
+
+#identity-name {
+    font-size: 60px;
+    font-weight: 900;
+}
+
+.knob {
+    font-size: 60px;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }

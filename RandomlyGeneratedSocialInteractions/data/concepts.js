@@ -9,7 +9,6 @@ module.exports = [
   "environmentalism",
   "materiality",
   "ecological dignity",
-  "performing the body",
   "cyberfeminism",
   "virality",
   "curatorial practices"

@@ -9,9 +9,18 @@ var generators = [
   require('./generators/weather'),
   require('./generators/awkward'),
   require('./generators/jobs'),
-  require('./generators/tv_shows'),
   require('./generators/art'),
-//  require('./generators/politics'),
+  require('./generators/exercise'),
+  require('./generators/faint'),
+  require('./generators/scream'),
+  require('./generators/silly'),
+  require('./generators/politics'),
+  require('./generators/complain'),
+  require('./generators/argument'),
+  require('./generators/third_wheel'),
+  require('./generators/game'),
+  
+  //require('./generators/tv_shows'),
   //require('./generators/life'),
 ];
 
@@ -39,7 +48,7 @@ function generateInteraction(one, two) {
 
 var Interaction = function(participants) {
   console.log("- creating interaction with participants:", _.map(participants, function(p) {
-    return p.name();
+    return p.identity.name();
   }));
   this.id = uuid();
   this.participants = participants;
@@ -147,7 +156,7 @@ Interaction.prototype.debug = function() {
     if (part.command === "say") verb = "says";
     if (part.command === "think") verb = "thinks";
     if (part.command === "do") verb = "does";
-    console.log("["+part.start.toLocaleString('en').split(', ')[1] + "] " + part.participant.name() + " " + verb + ': '  + part.content + " (" + part.duration + ")");
+    console.log("["+part.start.toLocaleString('en').split(', ')[1] + "] " + part.participant.identity.name() + " " + verb + ': '  + part.content + " (" + part.duration + ")");
   }
 };
 

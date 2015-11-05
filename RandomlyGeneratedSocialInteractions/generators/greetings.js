@@ -15,6 +15,8 @@ var greetings = [
   {type: 'one', f: function(p) { p.say("yo"); }},
   {type: 'one', f: function(p) { p.say("how's it going"); }},
   {type: 'one', f: function(p) { p.say("good evening!"); }},
+  {type: 'one', f: function(p) { p.do("nod"); }},
+  {type: 'one', f: function(p) { p.do("bow"); }},
   {type: 'both', f: function(p) { p.do("wave with your hand", null, true); }},
   {type: 'both', f: function(p) { p.do("give a handshake", null, true); }},
   {type: 'both', f: function(p) { p.do("hug each other", null, true); }},
@@ -22,8 +24,8 @@ var greetings = [
 ];
 
 module.exports = function (one, two) {
-  if (Math.random() < 0.5) one.think(_.sample(firstImpressions), null, true);
-  if (Math.random() < 0.5) two.think(_.sample(firstImpressions), null, true);
+  // if (Math.random() < 0.5) one.think(_.sample(firstImpressions), null, true);
+  // if (Math.random() < 0.5) two.think(_.sample(firstImpressions), null, true);
   var g1 = _.sample(greetings);
   if (g1.type === "both") {
     g1.f(one);
@@ -33,4 +35,7 @@ module.exports = function (one, two) {
     g1.f(one);
     g2.f(two);
   }
+  if (Math.random() < 0.3)  one.say("let's sit down, it's more comfortable");
+  one.do("sit down", null, true);
+  two.do("sit down", null, true);
 };

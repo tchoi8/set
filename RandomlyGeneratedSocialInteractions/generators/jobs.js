@@ -14,9 +14,7 @@ var reactionsToHearingAboutOnesJob = [
   },
   function genuinelyImpressed(one, two) {
     one.say("Wow, you must be really brilliant to be <%- other.occupation %>.");
-    two.do("laugh");
     two.say("My boss doesn't seem to think that");
-    one.say("awww");
   },
   function rudeResponse(one, two) {
     one.say("Do people seriously get paid to do that?");
@@ -31,7 +29,7 @@ var reactionsToHearingAboutOnesJob = [
       two.say("I was being sarcastic");
       one.say("Oh");
     } else {
-      one.say("Sooooo exciting");
+      one.say("So exciting");
     }
   },
 ];
@@ -50,7 +48,7 @@ var secondReactions = [
   },
   function thatsboring(one, two) {
     two.say("That sounds so boring");
-    one.say("It's not, actually");
+    one.say("It's not actually boring");
     one.think("How rude");
   }
 ];
@@ -59,10 +57,18 @@ module.exports = function(one, two) {
   one.say("So what do you do?")
   var randomCompany = _.sample(corpora.getFile("corporations", "fortune500").companies);
   if (Math.random() < 0.3) two.think(_.sample(thoughtsAboutJobDisclosure));
-  two.say("I work as <%- me.occupation %> at " + randomCompany);
-  _.sample(reactionsToHearingAboutOnesJob)(one, two);
+  if (two.identity.occupation == "unemployed") {
+    two.say("I'm unemployed");
+  } else {
+    two.say("I work as <%- me.occupation %> at " + randomCompany);
+    _.sample(reactionsToHearingAboutOnesJob)(one, two);
+  }
   two.say("And you?");
-  randomCompany = _.sample(corpora.getFile("corporations", "fortune500").companies);
-  one.say("Oh, I'm <%- me.occupation %> at " + randomCompany);
-  _.sample(secondReactions)(one, two);
+  if (one.identity.occupation == "unemployed") {
+    one.say("I'm unemployed");
+  } else {
+    randomCompany = _.sample(corpora.getFile("corporations", "fortune500").companies);
+    one.say("Oh, I'm <%- me.occupation %> at " + randomCompany);
+    _.sample(secondReactions)(one, two);
+  }
 };

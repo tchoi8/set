@@ -1,37 +1,42 @@
 var _ = require('lodash');
+var corpora = require('corpora-project');
 var excuses = require('../data/excuses');
+var socialNetworks = require('../data/social_networks');
 
 var responses = [
   "likewise",
   "let's keep in touch",
-  "and you",
   "nice to meet you too",
-  "yeah, good conversation"
+  "yeah, we had a good conversation"
 ];
 
 var postmortems = [
   "this actually felt good",
   "we could've talked about so much more",
-  "will i talk to this person again?",
-  "phew i'm glad this is over",
+  "i hope i talk to this person again",
+  "i'm glad this is over",
   "i never know how to end conversations"
 ];
 
+function generateUsername() {
+  return _.sample(corpora.getFile("humans", "moods").moods) + " " + _.sample(corpora.getFile("animals", "common").animals) + " " + _.random(0, 100);
+}
+
 module.exports = function(one, two) {
-  one.say("Well, " + _.sample(excuses));  
+  one.think("I need an excuse to go");  
+  one.say("I have to go, " + _.sample(excuses));  
   one.say("But it was great to meet you!");
   two.say(_.sample(responses));
-  if (Math.random() > 0.5) {
-    two.think("What an absurd excuse");
-  }
 
-  one.say("Can I add you on Facebook?");
+  var socialNetwork = _.sample(socialNetworks);
+  one.say("Can I add you on " + socialNetwork + "?");
   if (Math.random() > 0.5) {
-    two.say("I actually don't have a Facebook. Sorry.");
-  } else {
-    two.say("Sure, I have a pretty unique name so you can easily find me");
+    two.say("I don't have a " + socialNetwork + " sorry");
+  } else if (Math.random() > 0.) {
+    two.say("Of course");
+    two.say("my username is " + generateUsername());
   }
-
+  
   one.say("Okay then, see you around!");
 
   var farewell = _.sample([
@@ -46,12 +51,12 @@ module.exports = function(one, two) {
     one.do("pull back");
     
   } else if (farewell === "hug") {
-    one.do("give <%- other.firstName %> a hug");
-    two.do("give <%- other.firstName %> a hug");
+    one.do("give <%- other.firstName %> a hug", null, true);
+    two.do("give <%- other.firstName %> a hug", null, true);
 
   } else {
-    one.do("give <%- other.firstName %> a handshake");
-    two.do("give <%- other.firstName %> a handshake");
+    one.do("give <%- other.firstName %> a handshake", null, true);
+    two.do("give <%- other.firstName %> a handshake", null, true);
   }
   
   one.think(_.sample(postmortems), null, true);

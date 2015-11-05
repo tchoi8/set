@@ -63,6 +63,9 @@ function refresh() {
     interactions = _.filter(interactions, function(interaction) {
       if (!interaction.isValid()) {
         interaction.broadcastEnd();
+        _.each(interaction.participants, function(p){
+          p.isAvailable = false;
+        });
         interactionHistory.unshift(interaction);
       }
       return interaction.isValid();
@@ -98,18 +101,19 @@ wss.on('connection', function connection(c) {
   (function(conn){
     var participant = new Participant(conn);  
     participants.push(participant);
-
     console.log('- created connection', participant.id);
+    participant.broadcast('participant-id', participant.id);
 
     conn.on('message', function(msg) {
       var parsed = JSON.parse(msg);
 
       // adding some timeouts to responses to make the participant wait a few seconds
       switch(parsed.type) {
-      case 'i-want-a-personality':
+      case 'i-want-an-identity':
         setTimeout(function() {
           console.log("broadcasting personality");
-          participant.broadcast('personality', participant.serialize());
+          participant.regenerateIdentity();
+          participant.broadcast('identity', participant.identity.serialize());
         }, 8000);
         break;
 

@@ -3,7 +3,7 @@ var corpora = require('corpora-project');
 
 var responses = [
   "Yeah, that's one of my favorites",
-  "Yeah, was great for its time",
+  "Yeah, it was great for its time",
   "It was okay, I guess",
   "I honestly thought that was overrated",
   "I couldn't finish it",
@@ -13,11 +13,11 @@ var responses = [
 
 module.exports = function(one, two) {
   var tvShow = _.sample(corpora.getFile("film-tv", "tv_shows").tv_shows);
-  one.say("Have you seen " + tvShow + "?");
+  one.say("Have you seen the tv series " + tvShow + "?");
   two.say(_.sample(responses));
   //one.say(_.sample(responses2));
   tvShow = _.sample(corpora.getFile("film-tv", "tv_shows").tv_shows);
-  two.say("What about " + tvShow + "?");
+  two.say("What about the show " + tvShow + "?");
   one.say(_.sample(responses));
   //two.say(_.sample(responses2));
 };

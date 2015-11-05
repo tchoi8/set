@@ -9,16 +9,19 @@ var possibleStaringTargets = [
 
 var thingsToThinkAboutWhileBeingAwkwardWithAnotherPerson = [
   "i need to come up with something to say",
-  "put your brain to work <%- me.firstName %>, come on!",
 ];
 
 var awkwardBehaviors = [
   function awkwardStaring(p) {
-    p.do("stare at " + _.sample(possibleStaringTargets), 0);
+    p.do("stare at " + _.sample(possibleStaringTargets), null, true);
   },
 
   function pondering(p) {
-    p.think(_.sample(thingsToThinkAboutWhileBeingAwkwardWithAnotherPerson), 0);
+    p.think(_.sample(thingsToThinkAboutWhileBeingAwkwardWithAnotherPerson), null, true);
+  },
+
+  function oops(p) {
+    p.say("i feel like we've run out of things to say");
   }
 ];
 
@@ -29,8 +32,6 @@ function performAwkwardBehavior(p) {
 module.exports = function(one, two) {
   one.say(_.sample(["so", "um", "well"]));
   two.say(_.sample(["so", "um", "well"]));
-  one.think("this is awkward", null, true);
-  two.think("this is awkward", null, true);
   performAwkwardBehavior(one);
   performAwkwardBehavior(two);
 }

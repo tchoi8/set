@@ -1,5 +1,6 @@
 <html>
   <head>
+    <meta name="viewport" content="user-scalable=0"> 
     <link href="style.css" rel="stylesheet"></link>
     <title>Randomly Generated Social Interactions</title>
   </head>
@@ -16,16 +17,22 @@
     </div>
     <div id="ongoing">
       <div class="box" id="identity-box">
-        
-        <span>No identity received yet</span>
+        <p class="label">Your Identity:</p>
+        <img id="identity-image" src="images/questionmark.png"></img>
+        <p id="identity-name"></p>
       </div>
-      <div class="box" id="">
-        <span>Last instruction:</span>
-        <span id="last-instruction"><font color="gray">N/A</font></span>
+      <div class="box" id="instruction-box">
+        <p class="label">Interaction Partner:</p>
+        <p id="interaction-partner-name"><font color="gray">N/A</font></p>
       </div>
-      <div>
-        <input type="range" id="speed-input" value="1" min="0.5" max="1.5" step="0.01">
-        <span id="speed-input-label" class="input-label">voice speed (current value = 1.0)</span>
+      <div class="box" id="instruction-box">
+        <p class="label">Current Instruction:</p>
+        <p id="last-instruction"><font color="gray">N/A</font></p>
+      </div>
+      <div class="box" id="speed-box">
+        <p class="label">Voice Speed:</p>
+        <button class="knob" id="knob-minus">-</button><span id="speed-input" class="input-label">1.0</span>
+        <button class="knob" id="knob-plus">+</button>
       </div>
       <div><button id="end-button">end</button></div>
     </div>
