@@ -34,3 +34,27 @@ Featuring
 	- [Cici Chang](http://blog.liuchangitp.com/category/participatingperformance/)
 	- [Yifan Hu](http://yifantasy.com/?cat=25)  
 
+## run project
+
+### install node dependencies
+
+go to correct folder
+
+    cd RandomlyGeneratedSocialInteractions/
+
+run npm install
+
+    npm install
+    
+### start application
+
+Open 2 terminals and go to RandomlyGeneratedSocialInteractions/ directory.
+
+In one of them, run this npm script:
+
+    npm run start:server
+    
+read information about 'HOST' variable settings and go to RandomlyGeneratedSocialInteractions/static/app.js for set correct variable value. 
+then, run this npm command in the other terminal window
+    
+    npm run start:web-app
