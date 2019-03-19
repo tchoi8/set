@@ -5,13 +5,18 @@
   "main": ".#server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start:server": "node server.js",
+    "start:web-app": " http-server static/ -p 8000 -c-1 --cors[=headers] -o",
+    "postinstall": " mkdir -p node_modules/corpora-project/node_modules/ && cp -r node_modules/corpora/ node_modules/corpora-project/node_modules/corpora/"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "casual": "^1.4.9",
     "corpora-project": "^0.1.2",
+    "express": "^4.16.4",
+    "http-server": "^0.11.1",
+    "ip": "^1.1.5",
     "lodash": "^3.10.1",
     "node-uuid": "^1.4.3",
     "ws": "^0.8.0"

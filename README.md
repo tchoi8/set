@@ -34,3 +34,40 @@ Featuring
 	- [Cici Chang](http://blog.liuchangitp.com/category/participatingperformance/)
 	- [Yifan Hu](http://yifantasy.com/?cat=25)  
 
+# run project
+
+## install node dependencies
+
+go to correct folder
+
+    cd RandomlyGeneratedSocialInteractions/
+
+run npm install
+
+    npm install
+    
+## start application
+
+Open 2 terminals windows and go to RandomlyGeneratedSocialInteractions/directory.
+
+In one of them, run this npm script:
+
+    npm run start:server
+    
+read information about 'HOST' variable settings:
+
+![](./ws-server-screen.png?raw=false)
+
+and go to RandomlyGeneratedSocialInteractions/static/app.js to set to the correct host value:
+
+    var HOST = "ws://agermanidis.com:8080" -> VAR HOST = "WS://YOUR_IP:8080"
+
+Then, run this npm command in the other terminal window:
+    
+    npm run start:web-app
+    
+when launching "start: web-app", the console indicates:
+- on the first line, the local address to connect,
+- on the line line, the public address.
+
+![](./client-server-screen.png?raw=false)
