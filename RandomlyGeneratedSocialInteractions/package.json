@@ -5,6 +5,8 @@
   "main": ".#server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start:server": "node server.js",
+    "start:web-app": " http-server static/ -p 8000 -c-1 --cors[=headers] -o",
     "postinstall": " mkdir -p node_modules/corpora-project/node_modules/ && cp -r node_modules/corpora/ node_modules/corpora-project/node_modules/corpora/"
   },
   "author": "",
