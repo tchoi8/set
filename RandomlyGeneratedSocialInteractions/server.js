@@ -2,6 +2,9 @@ var _ = require('lodash');
 var express = require('express');
 var WebSocketServer = require('ws').Server;
 
+var ip = require("ip");
+console.log( "==========\nopen RandomlyGeneratedSocialInteractions/static/app.js and set 'HOST' variable to: \n \"ws://" + ip.address() + ":8080" + "\"\nand, run 'npm run start:web-app' in other terminal\n==========\n");
+
 var wss = new WebSocketServer({port: 8080});
 var app = express();
 
