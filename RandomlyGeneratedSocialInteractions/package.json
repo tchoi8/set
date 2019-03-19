@@ -13,6 +13,8 @@
     "casual": "^1.4.9",
     "corpora-project": "^0.1.2",
     "express": "^4.16.4",
+    "http-server": "^0.11.1",
+    "ip": "^1.1.5",
     "lodash": "^3.10.1",
     "node-uuid": "^1.4.3",
     "ws": "^0.8.0"
