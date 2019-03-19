@@ -16,7 +16,7 @@ var testInteraction = [
     {index: 0, command: "say", content: "Hello <%- other.firstName %>, I am <%- me.firstName %>", duration: 5},
     {index: 1, command: "say", content: "Hello <%- other.firstName %>", duration: 5},
     {index: 0, command: "say", content: "Goodbye <%- other.firstName %>", duration: 5},
-    {index: 1, command: "say", content: "Goodbye <%- other.firstName %>", duration: 5},
+    {index: 1, command: "say", content: "Goodbye <%- other.firstName %>", duration: 5}
 ];
 
 function pairParticipants(ps) {
