@@ -34,9 +34,9 @@ Featuring
 	- [Cici Chang](http://blog.liuchangitp.com/category/participatingperformance/)
 	- [Yifan Hu](http://yifantasy.com/?cat=25)  
 
-## run project
+# run project
 
-### install node dependencies
+## install node dependencies
 
 go to correct folder
 
@@ -46,7 +46,7 @@ run npm install
 
     npm install
     
-### start application
+## start application
 
 Open 2 terminals and go to RandomlyGeneratedSocialInteractions/ directory.
 
@@ -58,3 +58,9 @@ read information about 'HOST' variable settings and go to RandomlyGeneratedSocia
 then, run this npm command in the other terminal window
     
     npm run start:web-app
+    
+when launching "start: web-app", the console indicates:
+- on the first line, the local address to connect,
+- on the line line, the public address.
+
+![](https://github.com/tchoi8/set/blob/master/client-server-screen.png?raw=false)
